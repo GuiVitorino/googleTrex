@@ -99,16 +99,13 @@ function draw() {
     fimDeJogo.visible = true;
     reiniciar.visible = true;
     
-    //define velocidade de cada objeto do jogo como 0
     solo.velocityX = 0;
     trex.velocityY = 0;
     grupoDeObstaculos.setVelocityXEach(0);
     grupoDeNuvens.setVelocityXEach(0);
     
-    //altera a animação do Trex
     trex.changeAnimation("collided",trex_colidiu);
     
-    //define o tempo de vida dos objetos do jogo para que nunca sejam destruídos
     grupoDeObstaculos.setLifetimeEach(-1);
     grupoDeNuvens.setLifetimeEach(-1);
     
@@ -122,7 +119,6 @@ function draw() {
 }
 
 function gerarNuvens() {
-  //escreva o código aqui para gerar as nuvens 
   if (frameCount % 60 === 0) {
     nuvem = createSprite(600,120,40,10);
     nuvem.y = Math.round(random(80,120));
@@ -130,14 +126,11 @@ function gerarNuvens() {
     nuvem.scale = 0.5;
     nuvem.velocityX = -3;
     
-     //atribuir tempo de duração à variável
     nuvem.lifetime = 200; 
     
-    //ajustando a profundidade
     nuvem.depth = trex.depth;
     trex.depth = trex.depth + 1;
         
-    //adicionando nuvem ao grupo
    grupoDeNuvens.add(nuvem);
   }
   
@@ -146,10 +139,8 @@ function gerarNuvens() {
 function gerarObstaculos() {
   if(frameCount % 60 === 0) {
     var obstaculo = createSprite(600,165,10,40);
-    //obstaculo.debug = true;
     obstaculo.velocityX = -(6 + 3*pontuacao/100);
     
-    //gerar obstáculos aleatórios
     var rand = Math.round(random(1,6));
     switch(rand) {
       case 1: obstaculo.addImage(obstaculo1);
@@ -166,11 +157,9 @@ function gerarObstaculos() {
               break;
       default: break;
     }
-    
-    //atribuir escala e tempo de duração ao obstáculo           
+          
     obstaculo.scale = 0.5;
     obstaculo.lifetime = 300;
-    //adicionar cada obstáculo ao grupo
     grupoDeObstaculos.add(obstaculo);
   }
 }
